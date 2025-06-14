@@ -188,6 +188,8 @@ class RaySPPOTrainer(RayPPOTrainer):
                             self.async_rollout_manager.wake_up()
                             gen_batch_output = self.async_rollout_manager.generate_sequences(gen_batch)
                             self.async_rollout_manager.sleep()
+                        timing_raw.update(gen_batch_output.meta_info["timing"])
+                        gen_batch_output.meta_info.pop("timing", None)
 
                     if self.config.algorithm.adv_estimator == AdvantageEstimator.REMAX:
                         with _timer("gen_max", timing_raw):
@@ -239,8 +241,8 @@ class RaySPPOTrainer(RayPPOTrainer):
                     entropys = old_log_prob.batch["entropys"]
                     response_masks = batch.batch["response_mask"]
                     loss_agg_mode = self.config.actor_rollout_ref.actor.loss_agg_mode
-                    entropy_loss = agg_loss(loss_mat=entropys, loss_mask=response_masks, loss_agg_mode=loss_agg_mode)
-                    old_log_prob_metrics = {"actor/entropy_loss": entropy_loss.detach().item()}
+                    entropy_agg = agg_loss(loss_mat=entropys, loss_mask=response_masks, loss_agg_mode=loss_agg_mode)
+                    old_log_prob_metrics = {"actor/entropy": entropy_agg.detach().item()}
                     metrics.update(old_log_prob_metrics)
                     old_log_prob.batch.pop("entropys")
                     batch = batch.union(old_log_prob)
@@ -264,7 +266,6 @@ class RaySPPOTrainer(RayPPOTrainer):
                         reward_tensor, reward_extra_infos_dict = ray.get(future_reward)
                     batch.batch["token_level_scores"] = reward_tensor
 
-                    print(f"{list(reward_extra_infos_dict.keys())=}")
                     if reward_extra_infos_dict:
                         batch.non_tensor_batch.update({k: np.array(v) for k, v in reward_extra_infos_dict.items()})
 

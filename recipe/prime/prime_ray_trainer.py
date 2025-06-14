@@ -151,8 +151,9 @@ class RayPRIMETrainer(RayPPOTrainer):
         ray_worker_group_cls: RayWorkerGroup = RayWorkerGroup,
         reward_fn=None,
         val_reward_fn=None,
+        device_name="cuda",
     ):
-        # assert torch.cuda.is_available(), 'cuda must be available on driver'
+        # assert get_torch_device().is_available(), 'cuda must be available on driver'
 
         super().__init__(
             config,
@@ -162,6 +163,7 @@ class RayPRIMETrainer(RayPPOTrainer):
             ray_worker_group_cls,
             reward_fn,
             val_reward_fn,
+            device_name=device_name,
         )
 
         self.use_critic = False
@@ -351,6 +353,8 @@ class RayPRIMETrainer(RayPPOTrainer):
                     # generate a batch
                     with _timer("gen", timing_raw):
                         gen_batch_output = self.actor_rollout_wg.generate_sequences(gen_batch)
+                        timing_raw.update(gen_batch_output.meta_info["timing"])
+                        gen_batch_output.meta_info.pop("timing", None)
 
                     if self.config.algorithm.adv_estimator == "remax":
                         with _timer("gen_max", timing_raw):
@@ -402,8 +406,8 @@ class RayPRIMETrainer(RayPPOTrainer):
                         entropys = old_log_prob.batch["entropys"]
                         response_masks = compute_response_mask(batch)
                         loss_agg_mode = self.config.actor_rollout_ref.actor.loss_agg_mode
-                        entropy_loss = agg_loss(loss_mat=entropys, loss_mask=response_masks, loss_agg_mode=loss_agg_mode)
-                        old_log_prob_metrics = {"actor/entropy_loss": entropy_loss.detach().item()}
+                        entropy_agg = agg_loss(loss_mat=entropys, loss_mask=response_masks, loss_agg_mode=loss_agg_mode)
+                        old_log_prob_metrics = {"actor/entropy": entropy_agg.detach().item()}
                         metrics.update(old_log_prob_metrics)
                         old_log_prob.batch.pop("entropys")
                         batch = batch.union(old_log_prob)
