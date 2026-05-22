@@ -1,0 +1,516 @@
+# Instincts generated from https://github.com/wwj-git-rgb/verl
+# Generated: 2026-05-22T16:12:53.783Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: verl-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/wwj-git-rgb/verl
+---
+
+# Verl Commit Length
+
+## Action
+
+Write moderate-length commit messages (~73 characters)
+
+## Evidence
+
+- Average commit message length: 73 chars
+- Based on 6 commits
+
+---
+id: verl-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/wwj-git-rgb/verl
+---
+
+# Verl Naming Files
+
+## Action
+
+Use snake_case naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: snake_case
+
+---
+id: verl-import-relative
+trigger: "when importing modules"
+confidence: 0.75
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/wwj-git-rgb/verl
+---
+
+# Verl Import Relative
+
+## Action
+
+Use relative imports for project files
+
+## Evidence
+
+- Import analysis shows relative import pattern
+- Example: import { x } from '../lib/x'
+
+---
+id: verl-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/wwj-git-rgb/verl
+---
+
+# Verl Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: verl-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/wwj-git-rgb/verl
+---
+
+# Verl Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: verl-test-naming
+trigger: "when creating a test file"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/wwj-git-rgb/verl
+---
+
+# Verl Test Naming
+
+## Action
+
+Name test files using the pattern: *.test.ts
+
+## Evidence
+
+- File pattern: *.test.ts
+- Consistent across test files
+
+---
+id: verl-workflow-feature-development
+trigger: "when implementing a new feature"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/wwj-git-rgb/verl
+---
+
+# Verl Workflow Feature Development
+
+## Action
+
+Follow the feature-development workflow:
+1. Add feature implementation
+2. Add tests for feature
+3. Update documentation
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~30x per month
+- Files: **/*.test.*
+
+---
+id: verl-workflow-refactoring
+trigger: "when refactoring code"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/wwj-git-rgb/verl
+---
+
+# Verl Workflow Refactoring
+
+## Action
+
+Follow the refactoring workflow:
+1. Ensure tests pass before refactor
+2. Refactor code structure
+3. Verify tests still pass
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~15x per month
+- Files: src/**/*
+
+---
+id: verl-workflow-ci-workflow-update
+trigger: "when doing ci workflow update"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/wwj-git-rgb/verl
+---
+
+# Verl Workflow Ci Workflow Update
+
+## Action
+
+Follow the ci-workflow-update workflow:
+1. Edit one or more files under .github/workflows/ to update or add CI jobs.
+2. Update or add test scripts under tests/ or related directories to match new CI logic.
+3. Optionally update documentation under docs/ to reflect CI changes.
+4. Run or trigger CI to verify changes.
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: .github/workflows/*.yml, tests/**/*.py, tests/**/*.sh
+
+---
+id: verl-workflow-bugfix-single-module
+trigger: "when doing bugfix single module"
+confidence: 0.65
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/wwj-git-rgb/verl
+---
+
+# Verl Workflow Bugfix Single Module
+
+## Action
+
+Follow the bugfix-single-module workflow:
+1. Identify the problematic function or class in the relevant Python file.
+2. Edit the file to fix the bug (e.g., add guard, initialize variable, write missing file).
+3. Describe the bug, root cause, and fix in the commit message.
+4. Optionally add or update a test if feasible.
+5. Validate manually or via CI if possible.
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~3x per month
+- Files: verl/**/*.py
+
+---
+id: verl-instinct-file-naming
+trigger: "When creating or renaming a file in the repository"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: wwj-git-rgb/verl
+---
+
+# Verl Instinct File Naming
+
+## Action
+
+Use snake_case for file names
+
+## Evidence
+
+- Pattern in namingConventions.files: snake_case
+
+---
+id: verl-instinct-function-naming
+trigger: "When defining a new function"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: wwj-git-rgb/verl
+---
+
+# Verl Instinct Function Naming
+
+## Action
+
+Use camelCase for function names
+
+## Evidence
+
+- Pattern in namingConventions.functions: camelCase
+
+---
+id: verl-instinct-class-naming
+trigger: "When defining a new class"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: wwj-git-rgb/verl
+---
+
+# Verl Instinct Class Naming
+
+## Action
+
+Use PascalCase for class names
+
+## Evidence
+
+- Pattern in namingConventions.classes: PascalCase
+
+---
+id: verl-instinct-constant-naming
+trigger: "When defining a constant"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: wwj-git-rgb/verl
+---
+
+# Verl Instinct Constant Naming
+
+## Action
+
+Use SCREAMING_SNAKE_CASE for constant names
+
+## Evidence
+
+- Pattern in namingConventions.constants: SCREAMING_SNAKE_CASE
+
+---
+id: verl-instinct-import-style
+trigger: "When importing modules within the package"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: wwj-git-rgb/verl
+---
+
+# Verl Instinct Import Style
+
+## Action
+
+Use relative imports
+
+## Evidence
+
+- Pattern in importStyle: relative
+
+---
+id: verl-instinct-export-style
+trigger: "When exporting functions or classes from a module"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: wwj-git-rgb/verl
+---
+
+# Verl Instinct Export Style
+
+## Action
+
+Use named exports
+
+## Evidence
+
+- Pattern in exportStyle: named
+
+---
+id: verl-instinct-test-location
+trigger: "When adding new tests"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: wwj-git-rgb/verl
+---
+
+# Verl Instinct Test Location
+
+## Action
+
+Place test files in the 'tests' directory, separate from source code
+
+## Evidence
+
+- Pattern in architecture.folderStructure.testLocation: separate
+- Common folder: tests
+
+---
+id: verl-instinct-test-type
+trigger: "When writing tests for new or existing code"
+confidence: 0.7
+domain: testing
+source: repo-analysis
+source_repo: wwj-git-rgb/verl
+---
+
+# Verl Instinct Test Type
+
+## Action
+
+Write unit tests
+
+## Evidence
+
+- Pattern in testing.testTypes: unit
+
+---
+id: verl-instinct-test-pattern
+trigger: "When naming a test file"
+confidence: 0.6
+domain: testing
+source: repo-analysis
+source_repo: wwj-git-rgb/verl
+---
+
+# Verl Instinct Test Pattern
+
+## Action
+
+Use the pattern '*.test.ts' for test files
+
+## Evidence
+
+- Pattern in testing.filePattern: *.test.ts
+
+---
+id: verl-instinct-commit-prefix
+trigger: "When writing a commit message"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: wwj-git-rgb/verl
+---
+
+# Verl Instinct Commit Prefix
+
+## Action
+
+Prefix the commit message with relevant tags in square brackets (e.g., [docker], [fully_async], [ci])
+
+## Evidence
+
+- Seen in commits: [docker] chore: update vllm 0.20.2 image (#6393)
+- Pattern in commits.prefixes
+
+---
+id: verl-instinct-commit-format
+trigger: "When writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: wwj-git-rgb/verl
+---
+
+# Verl Instinct Commit Format
+
+## Action
+
+Use the format '[tag(s)] type: description (#issue_number)'
+
+## Evidence
+
+- Seen in commits: [megatron, cfg] feat: add Qwen3-VL-30B mbridge launch script on Ascend (#6443)
+
+---
+id: verl-instinct-feature-workflow
+trigger: "When implementing a new feature"
+confidence: 0.8
+domain: workflow
+source: repo-analysis
+source_repo: wwj-git-rgb/verl
+---
+
+# Verl Instinct Feature Workflow
+
+## Action
+
+Follow the sequence: implement feature → add tests → update documentation
+
+## Evidence
+
+- Workflow: feature-development
+- commitSequence: Add feature implementation, Add tests for feature, Update documentation
+
+---
+id: verl-instinct-refactor-workflow
+trigger: "When refactoring code"
+confidence: 0.8
+domain: workflow
+source: repo-analysis
+source_repo: wwj-git-rgb/verl
+---
+
+# Verl Instinct Refactor Workflow
+
+## Action
+
+Ensure tests pass before refactor → refactor code → verify tests still pass
+
+## Evidence
+
+- Workflow: refactoring
+- commitSequence: Ensure tests pass before refactor, Refactor code structure, Verify tests still pass
+
+---
+id: verl-instinct-ci-workflow-update
+trigger: "When a new model is supported, a dependency is updated, or CI coverage needs to be adjusted"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: wwj-git-rgb/verl
+---
+
+# Verl Instinct Ci Workflow Update
+
+## Action
+
+Edit .github/workflows/*.yml, update/add tests in tests/, optionally update docs/, and run/trigger CI
+
+## Evidence
+
+- Workflow: ci-workflow-update
+- Files involved: .github/workflows/*.yml, tests/**/*.py, docs/**/*.rst
+
+---
+id: verl-instinct-bugfix-single-module
+trigger: "When a specific error or bug is reported in a module (e.g., AttributeError, KeyError, missing guard)"
+confidence: 0.88
+domain: workflow
+source: repo-analysis
+source_repo: wwj-git-rgb/verl
+---
+
+# Verl Instinct Bugfix Single Module
+
+## Action
+
+Identify and fix the bug in the relevant Python file, describe the fix in the commit, and validate via CI or manual check
+
+## Evidence
+
+- Workflow: bugfix-single-module
+- Files involved: verl/**/*.py
+
